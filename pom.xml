@@ -15,10 +15,16 @@
         </dependency>
     </dependencies>
     <build>
-        <plugins>
-            <groupid>org.apache.maven.plugins</groupid>
-            //compile plugin надо
-        </plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.0.2</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+                <encoding>UTF-8</encoding>
+            </configuration>
+        </plugin>
     </build>
 
 </project>
