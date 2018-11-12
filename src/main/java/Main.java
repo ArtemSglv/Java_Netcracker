@@ -14,6 +14,7 @@ public class Main {
 
         repo.Add(new Person("Ивнаов Иван Иванович","male", formatter.parseDateTime("28.03.1997")));
         repo.Add(new Person("Zyev Pavel Ivanovich","male", formatter.parseDateTime("28.03.2008")));
+        repo.Add(new Person("Zyev Pavel Ivanovich","male", formatter.parseDateTime("28.03.2008")));
 
 
         for(int i=0;i<repo.GetPersonsLength();i++)

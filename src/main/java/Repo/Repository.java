@@ -6,45 +6,39 @@ import java.util.Arrays;
  * Контейнер для объектов Person
  */
 public class Repository {
-    public Repository(){
-        persons = new Person[1];
-        countOfPerson=0;
+    public Repository() {
+        persons = new Person[0];
     }
+
     private Person[] persons;
-    private int countOfPerson;
 
     /**
      * Добавляет элемент в массив
+     *
      * @param p добовляемый элемент
      */
-    public void Add(Person p)
-    {
-        if(countOfPerson>=persons.length)
-        {
-            persons = Arrays.copyOf(persons,persons.length+1);
-            persons[persons.length-1] = p;
-        }
-        else {
-            persons[countOfPerson] = p;
-        }
-        countOfPerson++;
+    public void add(Person p) {
+        persons = Arrays.copyOf(persons, persons.length + 1);
+        persons[persons.length - 1] = p;
     }
 
     /**
      * Удаляет элемент с индексом index
+     *
      * @param index удаляемого элемента
      */
-    public void Delete(int index)
-    {
-
+    public void delete(int index) {
+        for (int i = index; i < persons.length - 1; i++) {
+            persons[i] = persons[i + 1];
+        }
+        persons = Arrays.copyOf(persons, persons.length - 1);
     }
 
-    public Person GetPerson(int index)
-    {
+    public Person getPerson(int index) {
         return persons[index];
     }
-    public int GetPersonsLength()
-    {
+
+    public int getPersonsLength() {
         return persons.length;
     }
 }
