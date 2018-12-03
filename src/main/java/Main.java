@@ -1,3 +1,4 @@
+import org.joda.time.LocalDate;
 import repository.Person;
 import repository.PersonRepository;
 import org.joda.time.format.DateTimeFormat;
@@ -15,12 +16,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        repo.add(new Person("Ивнаов Иван Иванович", "male", formatter.parseDateTime("28.03.1997")));
-        repo.add(new Person("Zyev Pavel Ivanovich", "male", formatter.parseDateTime("28.03.2008")));
-        repo.add(new Person("Artem", "male", formatter.parseDateTime("15.03.2008")));
-        repo.add(new Person("Pavel", "male", formatter.parseDateTime("27.03.2008")));
-        repo.add(new Person("Ivan", "male", formatter.parseDateTime("28.03.2006")));
-        repo.add(new Person("Zak", "male", formatter.parseDateTime("28.03.2119")));
+        repo.add(new Person("Ивнаов Иван Иванович", "male", new LocalDate(1997,03,28)));
+        repo.add(new Person("Zyev Pavel Ivanovich", "male", new LocalDate(2008,03,28)));
+        repo.add(new Person("Artem", "male", new LocalDate(2008,03,15)));
+        repo.add(new Person("Pavel", "male", new LocalDate(2008,03,27))); //27.03.2008
+        repo.add(new Person("Ivan", "male", new LocalDate(2006,03,28)));
+        repo.add(new Person("Zak", "male", new LocalDate(2119,03,28)));
 
         while (true) {
 
@@ -76,12 +77,12 @@ public class Main {
     private static void printListOfPersons() {
         for (int i = 0; i < repo.getPersonsLength(); i++) {
             Person p = repo.getPerson(i);
-            System.out.println(i + " " + "id:" + p.getId() + " " + p.getFio() + " " + p.getSex() + " " + p.age());
+            System.out.println(i + " " + p.toString());
         }
     }
     private static void printListOfPersons(Person[] persons) {
         for (int i = 0; i < persons.length; i++) {
-            System.out.println(i + " " + "id:" + persons[i].getId() + " " + persons[i].getFio() + " " + persons[i].getSex() + " " + persons[i].age());
+            System.out.println(i + " " + persons[i].toString());
         }
     }
 
@@ -96,7 +97,7 @@ public class Main {
         System.out.println("Введите дату рождения в формате ДД.ММ.ГГГГ:");
         date = in.nextLine();
 
-        repo.add(new Person(fio, sex, formatter.parseDateTime(date)));
+        repo.add(new Person(fio, sex, new LocalDate())); //заполнить дату
     }
 
     private static void deletePerson() {
@@ -114,26 +115,30 @@ public class Main {
         System.out.println("3 - По возрасту");
 
         Scanner in = new Scanner(System.in);
+        Scanner stringScanner = new Scanner(System.in);
         int answer = in.nextInt();
         Person[] result= new Person[0];
         switch (answer) {
             case 1: {
-                System.out.println("Введите фамилию:");
                 String fio;
-                fio = in.nextLine();
+                System.out.println("Введите фамилию:");
+
+                fio = stringScanner.nextLine();
                 result = repo.find(fio, new FindByFio());
                 break;
             }
             case 2: {
-                System.out.println("Введите дату:");
                 String bday;
-                bday = in.nextLine();
+                System.out.println("Введите дату:");
+
+                bday = stringScanner.nextLine();
                 result = repo.find(bday, new FindByBirthday());
                 break;
             }
             case 3: {
-                System.out.println("Введите возраст:");
                 int age;
+                System.out.println("Введите возраст:");
+
                 age = in.nextInt();
                 result = repo.find(age, new FindByAge());
                 break;

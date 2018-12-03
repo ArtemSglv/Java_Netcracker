@@ -1,6 +1,9 @@
 package repository;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sorts.SortInterface;
+import sorts.impl.BubbleSort;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -9,6 +12,7 @@ import java.util.Comparator;
  * Контейнер для объектов Person
  */
 public class PersonRepository {
+    static Logger log = LogManager.getLogger(PersonRepository.class.getName());
     public PersonRepository(SortInterface sort) {
         persons = new Person[0];
         this.sort = sort;
@@ -25,6 +29,7 @@ public class PersonRepository {
     public void add(Person p) {
         persons = Arrays.copyOf(persons, persons.length + 1);
         persons[persons.length - 1] = p;
+        log.debug("Person "+p.getId()+"was added");
     }
 
     /**
@@ -35,6 +40,7 @@ public class PersonRepository {
     public void delete(int index) {
         for (int i = index; i < persons.length - 1; i++) {
             persons[i] = persons[i + 1];
+            log.debug("Person "+persons[i].getId()+"was deleted");
         }
         persons = Arrays.copyOf(persons, persons.length - 1);
     }
@@ -45,6 +51,10 @@ public class PersonRepository {
 
     public int getPersonsLength() {
         return persons.length;
+    }
+
+    public Person[] getPersonArray(){
+        return persons;
     }
 
     public void sort(Comparator<Person> condition) {
