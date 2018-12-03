@@ -29,7 +29,7 @@ public class PersonRepository {
     public void add(Person p) {
         persons = Arrays.copyOf(persons, persons.length + 1);
         persons[persons.length - 1] = p;
-        log.debug("Person "+p.getId()+"was added");
+        log.debug("Person "+p.getId()+" was added");
     }
 
     /**

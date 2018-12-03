@@ -9,8 +9,14 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="errors">
+        <Logger name="repository.PersonRepository" level="debug" additivity="false">
             <AppenderRef ref="LogFile"/>
+        </Logger>
+        <Logger name="repository.Person" level="debug" additivity="false">
+            <AppenderRef ref="LogFile"/>
+        </Logger>
+        <Root level="errors">
+            <AppenderRef ref="STDOUT"/>
         </Root>
     </Loggers>
 </Configuration>

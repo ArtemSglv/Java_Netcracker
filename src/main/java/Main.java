@@ -94,10 +94,10 @@ public class Main {
         fio = in.nextLine();
         System.out.println("Введите пол:");
         sex = in.nextLine();
-        System.out.println("Введите дату рождения в формате ДД.ММ.ГГГГ:");
+        System.out.println("Введите дату рождения в формате ГГГГ-ММ-ДД:");
         date = in.nextLine();
 
-        repo.add(new Person(fio, sex, new LocalDate())); //заполнить дату
+        repo.add(new Person(fio, sex, new LocalDate(date))); //заполнить дату
     }
 
     private static void deletePerson() {
