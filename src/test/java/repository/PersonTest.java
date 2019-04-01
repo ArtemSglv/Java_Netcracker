@@ -8,11 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 import sorts.impl.QuickSort;
 
+import static injection.Injector.inject;
 import static org.junit.Assert.*;
 
 public class PersonTest {
     private DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-    private PersonRepository repo = new PersonRepository(new QuickSort());
+    private PersonRepository repo = inject(new PersonRepository());
     private Person p;
     private Person p2;
     private Person p3;

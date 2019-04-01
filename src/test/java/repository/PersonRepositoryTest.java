@@ -11,12 +11,13 @@ import sorts.impl.BubbleSort;
 import sorts.impl.InsertionSort;
 import sorts.impl.QuickSort;
 
+import static injection.Injector.inject;
 import static org.junit.Assert.*;
 import static repository.Person.*;
 
 public class PersonRepositoryTest {
     private DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-    private PersonRepository repo = new PersonRepository(new QuickSort());
+    private PersonRepository repo = inject(new PersonRepository());
     private Person p;
     private Person p2;
     private Person p3;
@@ -34,7 +35,7 @@ public class PersonRepositoryTest {
 
     @Test
     public void add() {
-        repo = new PersonRepository(new QuickSort());
+        repo = inject(new PersonRepository());
         Person p = new Person("Anna","female",new LocalDate(2009,7,12));
         repo.add(p);
 

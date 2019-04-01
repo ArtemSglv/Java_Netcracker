@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Persons>
+    <person fio="Maksim" sex="devka" birthday="2001-02-01" />
+    <person fio="ne maksim" sex="male" birthday="2012-02-01" />
+    <person fio="ne maksim2" sex="female" birthday="2002-02-04" />
+</Persons>

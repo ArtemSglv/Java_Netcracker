@@ -1,24 +1,28 @@
 package repository;
 
+import injection.Inject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sorts.SortInterface;
-import sorts.impl.BubbleSort;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
 import java.util.Comparator;
 
 /**
  * Контейнер для объектов Person
  */
+@XmlRootElement(name= "Persons")
 public class PersonRepository {
     static Logger log = LogManager.getLogger(PersonRepository.class.getName());
-    public PersonRepository(SortInterface sort) {
+    public PersonRepository() {
         persons = new Person[0];
-        this.sort = sort;
     }
 
+    @XmlElement(name="person")
     private Person[] persons;
+    @Inject
     private SortInterface sort;
 
     /**
@@ -30,6 +34,10 @@ public class PersonRepository {
         persons = Arrays.copyOf(persons, persons.length + 1);
         persons[persons.length - 1] = p;
         log.debug("Person "+p.getId()+" was added");
+    }
+
+    public void addArrayOfPersons(Person[] persons){
+        this.persons = persons;
     }
 
     /**
@@ -70,6 +78,5 @@ public class PersonRepository {
             }
         return result;
     }
-
 
 }

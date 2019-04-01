@@ -1,27 +1,27 @@
+import XMLReader.XMLReader;
 import org.joda.time.LocalDate;
-import repository.Person;
-import repository.PersonRepository;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import repository.impl.*;
-import sorts.impl.*;
+import repository.Person;
+import repository.PersonRepository;
+import repository.impl.FindByAge;
+import repository.impl.FindByBirthday;
+import repository.impl.FindByFio;
 
 import java.util.Scanner;
+import XMLReader.*;
 
 public class Main {
-    static private DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
-    static private PersonRepository repo = new PersonRepository(new QuickSort());
-    //static private PersonRepository repo = new PersonRepository(new BubbleSort());
-    //static private PersonRepository repo = new PersonRepository(new InsertionSort());
+//    static private DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
+    static private PersonRepository repo;
+//    static private XMLReader xmlReader = new DOMReader();
+//    static private XMLReader xmlReader = new SAXReader();
+    static private XMLReader xmlReader = new JAXBReader();
+    static private String PATH_TO_XML = "src/main/resources/Persons.xml";
 
     public static void main(String[] args) {
 
-        repo.add(new Person("Ивнаов Иван Иванович", "male", new LocalDate(1997,03,28)));
-        repo.add(new Person("Zyev Pavel Ivanovich", "male", new LocalDate(2008,03,28)));
-        repo.add(new Person("Artem", "male", new LocalDate(2008,03,15)));
-        repo.add(new Person("Pavel", "male", new LocalDate(2008,03,27))); //27.03.2008
-        repo.add(new Person("Ivan", "male", new LocalDate(2006,03,28)));
-        repo.add(new Person("Zak", "male", new LocalDate(2119,03,28)));
+        repo=xmlReader.getPersonsFromXML(PATH_TO_XML);
 
         while (true) {
 
